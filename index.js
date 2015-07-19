@@ -90,14 +90,14 @@ function createServer(argv) {
 
         var key;
         try {
-            key = fs.readFileSync(opts.key);
+            key = fs.readFileSync(opts.key, opts.keyFormat || 'utf8');
         } catch(e) {
             throw new Error("Can't find SSL key in " + opts.key);
         }
 
         var cert;
         try {
-            cert = fs.readFileSync(opts.cert);
+            cert = fs.readFileSync(opts.cert, opts.certFormat || 'utf8');
         } catch(e) {
             throw new Error("Can't find SSL cert in " + opts.cert);
         }
