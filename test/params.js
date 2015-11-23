@@ -2,12 +2,12 @@ var assert = require('chai').assert;
 var supertest = require('supertest');
 var nock = require('nock');
 var async = require('async');
+var path = require('path')
 // Helper functions for the FS
 var rm = require('./test-utils').rm;
 var write = require('./test-utils').write;
 var cp = require('./test-utils').cp;
 var read = require('./test-utils').read;
-
 var ldnode = require('../index');
 
 describe('LDNODE params', function () {
@@ -159,7 +159,9 @@ describe('LDNODE params', function () {
       var server = supertest(ldp);
 
       it ('should fallback on current working directory', function () {
-        assert.equal(ldp.locals.ldp.root, './test/resources/');
+        assert.equal(
+          path.resolve(ldp.locals.ldp.root),
+          path.resolve('./test/resources'));
       });
 
       it ('should find resource in correct path', function(done) {
